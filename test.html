@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WAF Attack Testing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b1120;
+            color: #e5e7eb;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 25px;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .attack {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .attack h2 {
+            margin-top: 0;
+        }
+
+        .attack p {
+            color: #94a3b8;
+        }
+
+        code {
+            display: block;
+            background: #020617;
+            padding: 14px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #cbd5e1;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .back {
+            margin-top: 25px;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>🛡️ WAF Attack Testing</h1>
+
+    <p class="subtitle">
+        Controlled testing environment for Web Application Firewall
+    </p>
+
+
+    <!-- SQL INJECTION -->
+
+    <div class="attack">
+
+        <h2>💉 SQL Injection</h2>
+
+        <p>
+            Tests whether the WAF detects SQL injection patterns.
+        </p>
+
+        <code>' OR '1'='1</code>
+
+        <form action="/search" method="GET">
+
+            <input
+                type="hidden"
+                name="q"
+                value="' OR '1'='1"
+            >
+
+            <button type="submit">
+                Test SQL Injection
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- XSS -->
+
+    <div class="attack">
+
+        <h2>⚠️ Cross-Site Scripting (XSS)</h2>
+
+        <p>
+            Tests whether the WAF detects malicious script input.
+        </p>
+
+        <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>
+
+        <form action="/search" method="GET">
+
+            <input
+                type="hidden"
+                name="q"
+                value="<script>alert(1)</script>"
+            >
+
+            <button type="submit">
+                Test XSS
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- PATH TRAVERSAL -->
+
+    <div class="attack">
+
+        <h2>📁 Path Traversal</h2>
+
+        <p>
+            Tests whether the WAF detects directory traversal patterns.
+        </p>
+
+        <code>../../etc/passwd</code>
+
+        <form action="/search" method="GET">
+
+            <input
+                type="hidden"
+                name="q"
+                value="../../etc/passwd"
+            >
+
+            <button type="submit">
+                Test Path Traversal
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- COMMAND INJECTION -->
+
+    <div class="attack">
+
+        <h2>💻 Command Injection</h2>
+
+        <p>
+            Tests whether the WAF detects command injection patterns.
+        </p>
+
+        <code>; whoami</code>
+
+        <form action="/search" method="GET">
+
+            <input
+                type="hidden"
+                name="q"
+                value="; whoami"
+            >
+
+            <button type="submit">
+                Test Command Injection
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <a href="/dashboard" class="back">
+        ← Back to Security Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>
